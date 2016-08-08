@@ -125,3 +125,4 @@ include/
 
 # Pip check file
 pip-selfcheck.json
+.DS_Store
