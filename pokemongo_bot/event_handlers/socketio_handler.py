@@ -14,7 +14,11 @@ class SocketIoHandler(EventHandler):
         self.bot = bot
         self.host, port_str = url.split(':')
         self.port = int(port_str)
-        self.sio = SocketIO(self.host, self.port)
+        self.sio = SocketIO(host=self.host,port=self.port, 
+        headers={   'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+                    'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With, *'
+        })
 
     def handle_event(self, event, sender, level, msg, data):
         if msg:

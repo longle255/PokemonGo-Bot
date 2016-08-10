@@ -18,7 +18,7 @@ import cell_workers
 from base_task import BaseTask
 from plugin_loader import PluginLoader
 from api_wrapper import ApiWrapper
-from cell_workers.utils import distance
+from cell_workers.utils import distance, fort_details
 from event_manager import EventManager
 from human_behaviour import sleep
 from item_list import Item
@@ -29,6 +29,7 @@ from pokemongo_bot.websocket_remote_control import WebsocketRemoteControl
 from worker_result import WorkerResult
 from tree_config_builder import ConfigException, MismatchTaskApiVersion, TreeConfigBuilder
 from sys import platform as _platform
+ 
 import struct
 class PokemonGoBot(object):
     @property
@@ -494,6 +495,9 @@ class PokemonGoBot(object):
                             fort['gym_details'] = response_gym_details.get(
                                 'responses', {}
                             ).get('GET_GYM_DETAILS', None)
+                        # else:
+                        #     details = fort_details(self, fort.get('id'), lat, lng)
+                        #     fort['name'] = details.get('name', 'Unknown')
 
         user_data_cells = "data/cells-%s.json" % self.config.username
         with open(user_data_cells, 'w') as outfile:

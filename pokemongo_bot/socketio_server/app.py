@@ -2,11 +2,13 @@ import logging
 
 import socketio
 from flask import Flask
+from flask_cors import CORS, cross_origin
 
 
-sio = socketio.Server(async_mode='eventlet', logging=logging.NullHandler)
+sio = socketio.Server(async_mode='eventlet', logging=logging.NullHandler, cors_allowed_origins="*")
 app = Flask(__name__)
-
+# CORS(app)
+CORS(app,resources={r"/*":{"origins":"*"}})
 # client asks for data
 @sio.on('remote:send_request')
 def remote_control(sid, command):
