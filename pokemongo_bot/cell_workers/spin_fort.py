@@ -67,13 +67,17 @@ class SpinFort(BaseTask):
 
 
                 items_awarded = self.get_items_awarded_from_fort_spinned(response_dict)
+                spin_details['name']= fort_name
+                spin_details['id']= fort['id']
+                spin_details['latitude'] = lat
+                spin_details['longitude'] = lng
 
                 if experience_awarded or items_awarded:
                     self.emit_event(
                         'spun_pokestop',
                         formatted="Spun pokestop {pokestop}. Experience awarded: {exp}. Items awarded: {items}",
                         data={
-                            'pokestop': fort_name,
+                            'pokestop': spin_details,
                             'exp': experience_awarded,
                             'items': items_awarded
                         }
